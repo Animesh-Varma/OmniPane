@@ -5,9 +5,15 @@
 //  Created by Aishwarya Rana on 08/04/26.
 //
 
+import KeyboardShortcuts
 import Foundation
 import SwiftUI
 import AppKit
+
+extension KeyboardShortcuts.Name {
+    static let toggleApp = Self("toggleApp",
+                                default: .init(.k, modifiers: [.command, .option]))
+}
 
 class AppDelegate: NSObject, NSApplicationDelegate {
     var window: NSWindow!
@@ -40,8 +46,28 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         if let button = statusItem.button {
             button.image =
                 NSImage(systemSymbolName: "text.and.command.macwindow", accessibilityDescription: "OmniPane")
-            button.action = #selector(toggleWindow)
-            button.target = self
+        //            button.action = #selector(toggleWindow)
+        //            button.target = self
+        }
+        
+        let menu = NSMenu()
+        
+        let appItem = NSMenuItem(title: "OmniPane", action: #selector(toggleWindow), keyEquivalent: "")
+        appItem.image = NSImage(systemSymbolName: "arrow.up.forward.app", accessibilityDescription: nil)
+        menu.addItem(appItem)
+        
+        menu.addItem(NSMenuItem(title: "Settings", action: #selector(openSettings), keyEquivalent: ","))
+        // Settings has an icon. I researched and found that Apple by default adds a gear icon for "Settings" since macOS Ventura. Anyways, I'll add icons for all items then.
+        
+        let quitItem = NSMenuItem(title: "Quit", action: #selector(quitApp), keyEquivalent: "q")
+        quitItem.image = NSImage(systemSymbolName: "xmark.circle", accessibilityDescription: nil)
+        menu.addItem(quitItem)
+        
+        statusItem.menu = menu
+        
+        KeyboardShortcuts.onKeyUp(for: .toggleApp) {
+            [weak self] in
+            self?.toggleWindow()
         }
     }
     
@@ -52,5 +78,13 @@ class AppDelegate: NSObject, NSApplicationDelegate {
             window.makeKeyAndOrderFront(nil)
             NSApp.activate(ignoringOtherApps: true)
         }
+    }
+    
+    @objc func openSettings() {
+        print()
+    }
+    
+    @objc func quitApp() {
+        NSApplication.shared.terminate(nil)
     }
 }

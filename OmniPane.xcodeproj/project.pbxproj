@@ -6,6 +6,10 @@
 	objectVersion = 77;
 	objects = {
 
+/* Begin PBXBuildFile section */
+		2F2EAAB92F86942700BD9288 /* KeyboardShortcuts in Frameworks */ = {isa = PBXBuildFile; productRef = 2F2EAAB82F86942700BD9288 /* KeyboardShortcuts */; };
+/* End PBXBuildFile section */
+
 /* Begin PBXFileReference section */
 		2F9380102F860E4C00F85565 /* OmniPane.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = OmniPane.app; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -36,6 +40,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2F2EAAB92F86942700BD9288 /* KeyboardShortcuts in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -78,6 +83,7 @@
 			);
 			name = OmniPane;
 			packageProductDependencies = (
+				2F2EAAB82F86942700BD9288 /* KeyboardShortcuts */,
 			);
 			productName = OmniPane;
 			productReference = 2F9380102F860E4C00F85565 /* OmniPane.app */;
@@ -107,6 +113,9 @@
 			);
 			mainGroup = 2F9380072F860E4C00F85565;
 			minimizedProjectReferenceProxies = 1;
+			packageReferences = (
+				2F2EAAB72F86942700BD9288 /* XCLocalSwiftPackageReference "../../../../../../aishwarya/Downloads/KeyboardShortcuts-2.4.0" */,
+			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = 2F9380112F860E4C00F85565 /* Products */;
 			projectDirPath = "";
@@ -346,6 +355,20 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCLocalSwiftPackageReference section */
+		2F2EAAB72F86942700BD9288 /* XCLocalSwiftPackageReference "../../../../../../aishwarya/Downloads/KeyboardShortcuts-2.4.0" */ = {
+			isa = XCLocalSwiftPackageReference;
+			relativePath = "../../../../../../aishwarya/Downloads/KeyboardShortcuts-2.4.0";
+		};
+/* End XCLocalSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		2F2EAAB82F86942700BD9288 /* KeyboardShortcuts */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = KeyboardShortcuts;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 2F9380082F860E4C00F85565 /* Project object */;
 }
