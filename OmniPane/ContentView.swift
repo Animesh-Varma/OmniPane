@@ -20,6 +20,14 @@ struct ContentView: View {
                 endPoint: .bottomTrailing
             )
             .ignoresSafeArea()
+            
+            ScrollView(.vertical, showsIndicators: true) {
+                VStack(spacing: 20) {
+                    FileDropView()
+                        .padding(.top, 5)
+                }
+                .padding(.bottom, 20)
+            }
         }
         .frame(minWidth: 300, maxWidth: 700, minHeight: 400)
         .navigationTitle("OmniPane").font(.headline).foregroundStyle(Color.white.opacity(0.8))
