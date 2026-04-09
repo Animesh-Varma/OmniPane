@@ -25,6 +25,9 @@ struct ContentView: View {
                 VStack(spacing: 20) {
                     FileDropView()
                         .padding(.top, 5)
+                    
+                    ScratchNotesView()
+                        .padding(.top, 5)
                 }
                 .padding(.bottom, 20)
             }
@@ -34,3 +37,4 @@ struct ContentView: View {
     }
 }
 
+// accessing via shortctu
