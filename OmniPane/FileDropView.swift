@@ -15,9 +15,13 @@ struct FileDropView: View {
     
     var body: some View {
         VStack(alignment: .leading) {
-            Text("File Drop")
-                .font(.title3)
-                .foregroundColor(.white.opacity(0.8))
+            HStack {
+                SixDotDragHandle(rawItemName: "File Drop")
+                
+                Text("File Drop")
+                    .font(.title3)
+                    .foregroundColor(.white.opacity(0.8))
+            }
                 .padding(.horizontal)
                 .padding(.top, 10)
     

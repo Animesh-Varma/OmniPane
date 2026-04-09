@@ -82,11 +82,13 @@ struct UtilityWrapper<Content: View>: View {
     let item: AppUtility
     @Binding var list: [AppUtility]
     
+    //    @State private var isHovering = false
+    
     let content: Content
     
     init(item: AppUtility,
-        list: Binding<[AppUtility]>,
-        @ViewBuilder content: () -> Content
+         list: Binding <[AppUtility]>,
+         @ViewBuilder content: () -> Content
     ) {
         self.item = item
         self._list = list
@@ -94,54 +96,107 @@ struct UtilityWrapper<Content: View>: View {
     }
     
     var body: some View {
-        ZStack(alignment: .topTrailing) {
-            content
-            
-            Image(systemName: "line.3.horizontal")
-                .font(.title2)
-                .foregroundColor(.white.opacity(0.2))
-                .padding(25)
-                .onDrag {
-                    return NSItemProvider(object: item.rawValue as NSString)
+        content
+            .dropDestination(for: String.self) {
+                items, location in
+                guard let firstItem = items.first,
+                      let draggedUtility = AppUtility(rawValue: firstItem),
+                      draggedUtility != item,
+                      let fromIndex = list.firstIndex(of: draggedUtility),
+                      let toIndex = list.firstIndex(of: item) else {return false}
+                
+                withAnimation(.default) {
+                    list.move(fromOffsets: IndexSet(integer: fromIndex),
+                              toOffset: toIndex > fromIndex ? toIndex + 1 : toIndex)
                 }
-        }
-        .onDrop(of: [.plainText], delegate:
-            ReorderDelegate(item: item, list: $list))
-    }
-}
-
-struct ReorderDelegate: DropDelegate {
-    let item: AppUtility
-    @Binding var list: [AppUtility]
-    
-    func dropEntered(info: DropInfo) {
-        guard info.hasItemsConforming(to: [.plainText])
-        else { return }
+                return true
+            }
         
-        let draggedItem = info.itemProviders(for: [.plainText]).first
-        draggedItem?.loadItem(forTypeIdentifier: "public.plain-text", options: nil) { (data, error) in
-            if let data = data as? Data, let draggedString = String(data: data, encoding: .utf8) {
-                DispatchQueue.main.async {
-                    guard let draggedUtility = AppUtility(rawValue: draggedString),
-                          draggedUtility != item,
-                          let fromIndex = list.firstIndex(of: draggedUtility),
-                          let toIndex = list.firstIndex(of: item) else {return}
-                    
-                    withAnimation(.default) {
-                        list.move(fromOffsets: IndexSet(integer: fromIndex),
-                                  toOffset: toIndex > fromIndex ? toIndex + 1 : toIndex)
+        //        ZStack(alignment: .topTrailing) {
+        //            content
+        //            SixDotDragHandle()
+        //                .opacity(isHovering ? 1.0 : 0.0)
+        //                .padding(.top, 12)
+        //                .padding(.leading, 8)
+        //                .onDrag {
+        //                    return NSItemProvider(object: item.rawValue as NSString)
+        //                } preview: {
+        //                    content.frame(width: 300)
+        //                }
+        //        }
+        //        .onHover { hovering in
+        //            withAnimation(.easeInOut(duration: 0.2)) {
+        //                isHovering = hovering
+        //            }
+        //        }
+        //        .onDrop(of: [.plainText], delegate:
+        //            ReorderDelegate(item: item, list: $list))
+        //    }
+    }
+    
+    struct ReorderDelegate: DropDelegate {
+        let item: AppUtility
+        @Binding var list: [AppUtility]
+        
+        func dropEntered(info: DropInfo) {
+            guard info.hasItemsConforming(to: [.plainText])
+            else { return }
+            
+            let draggedItem = info.itemProviders(for: [.plainText]).first
+            draggedItem?.loadItem(forTypeIdentifier: "public.plain-text", options: nil) { (data, error) in
+                if let data = data as? Data, let draggedString = String(data: data, encoding: .utf8) {
+                    DispatchQueue.main.async {
+                        guard let draggedUtility = AppUtility(rawValue: draggedString),
+                              draggedUtility != item,
+                              let fromIndex = list.firstIndex(of: draggedUtility),
+                              let toIndex = list.firstIndex(of: item) else {return}
+                        
+                        withAnimation(.default) {
+                            list.move(fromOffsets: IndexSet(integer: fromIndex),
+                                      toOffset: toIndex > fromIndex ? toIndex + 1 : toIndex)
+                        }
                     }
                 }
             }
         }
-    }
-    
-    func dropUpdated(info: DropInfo) -> DropProposal? {
-        return DropProposal(operation: .move)
-    }
-
-    func performDrop(info: DropInfo) -> Bool {
-        return true
+        
+        func dropUpdated(info: DropInfo) -> DropProposal? {
+            return DropProposal(operation: .move)
+        }
+        
+        func performDrop(info: DropInfo) -> Bool {
+            return true
+        }
     }
 }
+ 
+struct SixDotDragHandle: View {
+        var rawItemName: String
+        
+        var body: some View {
+            HStack(spacing: 3) {
+                VStack(spacing: 3) {
+                    Circle().frame(width: 3, height: 3)
+                    Circle().frame(width: 3, height: 3)
+                    Circle().frame(width: 3, height: 3)
+                }
+                VStack(spacing: 3) {
+                    Circle().frame(width: 3, height: 3)
+                    Circle().frame(width: 3, height: 3)
+                    Circle().frame(width: 3, height: 3)
+                }
+            }
+            .foregroundColor(.white.opacity(0.5))
+            .padding(10)
+            .contentShape(Rectangle())
+            .draggable(rawItemName)
+            .onHover { hover in
+                if hover {
+                    NSCursor.openHand.push()
+                } else {
+                    NSCursor.pop()
+                }
+            }
+        }
+    }
 

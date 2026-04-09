@@ -29,6 +29,8 @@ struct ScratchNotesView: View {
                     .buttonStyle(PlainButtonStyle())
                 }
                 
+                SixDotDragHandle(rawItemName: "Scratch Notes")
+                
                 Text("Scratch Notes")
                     .font(.title3)
                     .foregroundColor(.white.opacity(0.8))
