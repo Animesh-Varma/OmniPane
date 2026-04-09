@@ -18,6 +18,9 @@ extension KeyboardShortcuts.Name {
 class AppDelegate: NSObject, NSApplicationDelegate {
     var window: NSWindow!
     var statusItem: NSStatusItem!
+    var popover: NSPopover!
+    var settingsWindow: NSWindow?
+    
     func applicationDidFinishLaunching(_ notification: Notification) {
         NSApp.setActivationPolicy(.accessory)
         let contentView = ContentView()
@@ -81,8 +84,24 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     }
     
     @objc func openSettings() {
+        if settingsWindow == nil {
+            let window = NSWindow(
+                contentRect: NSRect(x: 0, y: 0, width: 300, height: 400),
+                styleMask: [.titled, .closable, .miniaturizable, .resizable],
+                backing: .buffered,
+                defer: false
+            )
+            
+            window.title = "OmniPane Settings"
+            window.isReleasedWhenClosed = false
+            window.center()
+            
+            window.contentView = NSHostingView(rootView: SettingsView())
+            
+            self.settingsWindow = window
+        }
         NSApp.activate(ignoringOtherApps: true)
-        NSApp.sendAction(Selector(("showSettingsWindow:")), to: nil, from: nil)
+        settingsWindow?.makeKeyAndOrderFront(nil)
     }
     
     @objc func quitApp() {

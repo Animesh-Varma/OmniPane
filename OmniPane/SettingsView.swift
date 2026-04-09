@@ -58,6 +58,6 @@ struct SettingsView: View {
             Spacer()
         }
         .padding(20)
-        .frame(minWidth: 100, maxWidth: 300, minHeight: 200, maxHeight: 500)
+        .frame(minWidth: 100, maxWidth: 300, minHeight: 200, maxHeight: 400)
     }
 }
