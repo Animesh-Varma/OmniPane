@@ -1,10 +1,12 @@
 # OmniPane v1.0
 
-## Video for Reviewers (Will be added sometime after shipping)
+## Video for Peer Reviewers & Shipwrights - Includes Instatllation, Features and MOST IMPORTANTLY, Bugs.
+https://github.com/user-attachments/assets/b0278f5d-eb54-4352-860f-f62125697233
 
 ## Overview
 **OmniPane** is a modular, universal utility sidebar designed for native macOS and will very soon come for Windows. 
 It operates silently as an unobtrusive menubar agent, summoned on command across any desktop workspace to serve as a high-speed productivity staging area.
+
 ---
 ## Features
 ### 🖥️ Native Operation
@@ -22,12 +24,27 @@ It operates silently as an unobtrusive menubar agent, summoned on command across
     *   **Contextual Tooling:** Sleek glassmorphism hover-states neatly reveal Edit/Trash tools only when targeted.
 ### ↕️ Dynamic Reordering Engine
 OmniPane allows you to build your stack *your* way. Hovering over a module reveals a custom 6-dot UI grip. Simply grab it and physically drag the module up or down to globally reorganize the utility stack.
+
+---
+## Buggy Features (Will be fixed in next release)
+#### Dragging to change position
+- It works but only in a very specific, kinda unusable way.
+- It is clearly demonstrated in the main demo video at the top of the page.
+- But here's another video of how it'll work (it won't work any other way):
+
+https://github.com/user-attachments/assets/1a4b7ef2-b99e-4f20-8e59-fc532f3dba65
+
+#### Memory Reset
+- Scratch Notes' & FileDrop's memory resets when app is closed or utility is deactivated in the settings.
+- It is clearly demonstrated in the main demo video at the top of the page.
+
 ---
 ## Usage Guide
 1. Launch the app. You'll see the default Menu Bar icon. 
 2. **Accessing:** Click the `macwindow` icon in your menu bar, or simply hit `Cmd + Option + K` anywhere on your computer.
 3. **Module Drag & Drop:** Hover your mouse near the exact left side of a utility's title text (e.g., File Drop). A 6-dot grip will fade in. Click and hold the grip to drag that utility box to the top or bottom of your stack.
 4. **Settings:** Click the Menu Bar icon and hit `Settings`, or hit `Cmd + ,` while the app is active. You can universally toggle components on or off from this window, and change your global hotkey instantly.
+
 ---
 ## Installation Guide (macOS)
 OmniPane relies completely on native Core functions. Because it currently isn't tied to a paid, official Apple Developer ID, Apple's Gatekeeper will initially block the app from opening as a safety precaution. Follow these exact steps to bypass:
@@ -42,3 +59,18 @@ OmniPane relies completely on native Core functions. Because it currently isn't 
 9. Provide your Mac Administrator password (or Touch ID fingerprint) when prompted.
 10. Click **Open** on the final confirmation popup.
 11. **You're fully installed!** *(Pro Tip: Hit `Cmd + ,` to open Settings and toggle "Launch at Login" so you never have to do this again!)*
+
+---
+## AI Usage Declaration
+- Color Palette Suggestions
+- Minor code writings (~5%)
+- Rewrote README based on my draft.
+
+---
+## Coming Up
+- Adding memory to file drop & scratch notes
+- Fixing drag reorder
+- Add System Monitor Utility
+- Add Color Palette & Picker Utility
+- Add Clipboard Manager Utility
+- Add Screenshot Manager Utility
