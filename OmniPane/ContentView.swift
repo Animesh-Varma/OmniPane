@@ -23,17 +23,10 @@ struct ContentView: View {
 
     var body: some View {
         ZStack {
-            // AI Written gradient -- feeling lazy :\
-            LinearGradient(
-                gradient: Gradient(colors: [
-                    Color(red: 19/255, green: 63/255, blue: 15/255).opacity(1),
-                    Color(red: 7/255, green: 25/255, blue: 6/255).opacity(1)
-                ]),
-                startPoint: .topLeading,
-                endPoint: .bottomTrailing
-            )
-            .ignoresSafeArea()
-            
+            // Liquid Glass UI Foundation
+                        Color.clear
+                            .background(.ultraThinMaterial)
+                            .ignoresSafeArea()
             ScrollView(.vertical, showsIndicators: true) {
                 VStack(spacing: 20) {
                     ForEach(activeOrder) { utility in
