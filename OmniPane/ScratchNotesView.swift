@@ -67,7 +67,7 @@ struct ScratchNotesView: View {
                         Text("Click ⌘ + Enter to save")
                             .font(.body.weight(.light))
                             .foregroundColor(.white.opacity(0.2))
-                            .padding(.top, 18)
+                            .padding(.top, 10)
                             .padding(.horizontal, 15)
                             .allowsHitTesting(false)
                     }
